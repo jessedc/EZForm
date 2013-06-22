@@ -60,9 +60,9 @@
 // EZFormGenericField updateView -> updateUI -> updateUIWithValue:
 - (void)updateUIWithValue:(id)value
 {
-    if (self.displayRoundedFieldValues)
+    if (self.valueFormatter)
     {
-        value = [NSString stringWithFormat:@"%0.0f",floorf([value floatValue])];
+        value = [self.valueFormatter stringFromNumber:value];
     }
 
     [super updateUIWithValue:value];
@@ -82,7 +82,7 @@
 
 - (void)sliderChanged:(UISlider *)slider
 {
-    [self setActualFieldValue:@(slider.value)];
+    [self setFieldValue:@(slider.value)];
     [self updateView];
 }
 
