@@ -37,7 +37,7 @@
     TEXTFIELDFILTER inputFilterFn;
 }
 
-@property (nonatomic, copy) NSString *internalValue;
+@property (nonatomic, copy) id internalValue;
 @property (nonatomic, strong) NSMutableArray *inputFilterBlocks;
 @property (nonatomic, strong) UIView *userControl;
 
@@ -382,8 +382,8 @@
 
 - (id)actualFieldValue
 {
-    NSString *value = self.internalValue;
-    if (self.trimWhitespace) {
+    id value = self.internalValue;
+    if (self.trimWhitespace && [value respondsToSelector:@selector(stringByTrimmingCharactersInSet:)]) {
 	value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
 
