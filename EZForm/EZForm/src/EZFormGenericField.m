@@ -38,8 +38,6 @@ typedef enum {
 @property (nonatomic, strong) UIView *userControl;
 @property (nonatomic, assign) EZFormGenericFieldUserControlType userControlType;
 
-- (void)updateUI;
-- (void)unwireUserControl;
 @end
 
 

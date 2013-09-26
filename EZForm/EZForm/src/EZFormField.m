@@ -135,7 +135,6 @@
     return result;
 }
 
-
 #pragma mark - Custom property accessors
 
 - (void)setInputAccessoryView:(UIView *)inputAccessoryView

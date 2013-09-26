@@ -42,9 +42,6 @@ typedef enum {
 @property (nonatomic, strong) UIView *userControl;
 @property (nonatomic, assign) EZFormBooleanFieldUserControlType userControlType;
 
-- (void)updateUI;
-- (void)wireUpButton;
-- (void)wireUpSwitch;
 @end
 
 
