@@ -39,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *likesFieldTableViewCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *dateTableViewCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *ratingTableViewCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *priceRangeTableViewCell;
 
 @property (strong, nonatomic) IBOutlet UITextField *ageTextField;
 @property (strong, nonatomic) IBOutlet UITextView *bioTextView;
@@ -47,6 +48,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *genderFieldLabel;
 @property (strong, nonatomic) IBOutlet UILabel *likesFieldLabel;
 @property (strong, nonatomic) IBOutlet UITextField *dateTextField;
+@property (strong, nonatomic) IBOutlet EZFormInputControl *priceRangeInputControl;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *lastnameTextField;
 @property (strong, nonatomic) IBOutlet UIButton *registerButton;

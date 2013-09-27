@@ -58,6 +58,8 @@
     section.key = aKey;
     section.choices = choices;
     section.orderedKeys = keys;
+    section.selectedKey = section.orderedKeys[0];
+
     return section;
 }
 

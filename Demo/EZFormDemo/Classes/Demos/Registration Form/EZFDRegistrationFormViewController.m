@@ -40,6 +40,7 @@ static NSString * const EZFDRegistrationFormDateKey = @"date";
 static NSString * const EZFDRegistrationFormBioKey = @"bio";
 static NSString * const EZFDRegistrationFormAcceptTermsKey = @"acceptterms";
 static NSString * const EZFDRegistrationFormRatingKey = @"rating";
+static NSString * const EZFDRegistrationFormPriceRangeKey = @"price-range";
 
 
 #pragma mark - UIView utility category interface -
@@ -132,7 +133,15 @@ static NSString * const EZFDRegistrationFormRatingKey = @"rating";
     likesField.mutuallyExclusiveChoice = @"everything";
     [likesField setFieldValue:@"everything"];
     [_registrationForm addFormField:likesField];
-    
+
+
+    EZFormRangeField *rangeField = [[EZFormRangeField alloc] initWithKey:EZFDRegistrationFormPriceRangeKey];
+    NSDictionary *choices = @{@"100" : @"100", @"200" : @"200"};
+    NSArray *orderedKeys = @[@"100", @"200"];
+    rangeField.upperRange = [EZFormRangeFieldSection EZFormRangeFieldSectionWithKey:@"minimumPrice" choices:choices orderedKeys:orderedKeys];
+    rangeField.lowerRange = [EZFormRangeFieldSection EZFormRangeFieldSectionWithKey:@"maximumPrice" choices:choices orderedKeys:orderedKeys];
+    [_registrationForm addFormField:rangeField];
+
     /*
      * Add an EZFormDateField instance to handle the date field.
      * Enables a validation that requires date.  Correct date format set in inDateFormatter
@@ -217,6 +226,11 @@ static NSString * const EZFDRegistrationFormRatingKey = @"rating";
     EZFormMultiRadioFormField *likesField = [self.registrationForm formFieldForKey:EZFDRegistrationFormLikesKey];
     [likesField useLabel:self.likesFieldLabel];
 
+    EZFormRangeField *rangeField = [self.registrationForm formFieldForKey:EZFDRegistrationFormPriceRangeKey];
+    [rangeField useLabel:self.priceRangeInputControl];
+    [rangeField setInputView:[UIPickerView new]];
+
+
     EZFormContinuousField *ratingField = [self.registrationForm formFieldForKey:EZFDRegistrationFormRatingKey];
     NSNumberFormatter *continouousFormatter = [[NSNumberFormatter alloc] init];
     continouousFormatter.minimumFractionDigits = 0;
@@ -244,7 +258,8 @@ static NSString * const EZFDRegistrationFormRatingKey = @"rating";
 		      EZFDRegistrationFormBioKey: self.bioTableViewCell,
 		      EZFDRegistrationFormAcceptTermsKey: self.acceptTermsFieldTableViewCell,
                       EZFDRegistrationFormLikesKey: self.likesFieldTableViewCell,
-                       EZFDRegistrationFormRatingKey : self.ratingTableViewCell};
+                       EZFDRegistrationFormRatingKey : self.ratingTableViewCell,
+                       EZFDRegistrationFormPriceRangeKey : self.priceRangeTableViewCell };
     
     /*
      * Update validity indication for each field.
@@ -312,6 +327,10 @@ static NSString * const EZFDRegistrationFormRatingKey = @"rating";
     else if (cell == self.acceptTermsFieldTableViewCell) {
 	EZFormBooleanField *acceptTermsField = [self.registrationForm formFieldForKey:EZFDRegistrationFormAcceptTermsKey];
 	[acceptTermsField toggleValue];
+    }
+    else if (cell == self.priceRangeTableViewCell) {
+        EZFormRangeField *rangeField = [self.registrationForm formFieldForKey:EZFDRegistrationFormPriceRangeKey];
+        [rangeField.userView becomeFirstResponder];
     }
     else {
 	// If cell contains a UITextField or UITextView, make it first responder
